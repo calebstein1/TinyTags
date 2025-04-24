@@ -11,12 +11,10 @@ function Tags_InitTags() {
 		if (!tag_map[Tags_ElementsList[i].dataset.tag]) {
 			tag_map[Tags_ElementsList[i].dataset.tag] = current;
 			Tags_ActiveTags |= current;
-			if (++c >= 64) {
+			if (++c >= 64)
 				console.log("Tags: Error: Maximum tag limit reached");
-			} else {
-				console.log(`Enumerating tag ${Tags_ElementsList[i].dataset.tag} as ${current}`);
+			else
 				current <<= 1;
-			}
 		}
 		Tags_ElementsList[i].dataset.tag = tag_map[Tags_ElementsList[i].dataset.tag];
 	}
@@ -27,7 +25,6 @@ function Tags_InitTags() {
 			const t = Number(e.target.dataset.tagClickable);
 
 			e.preventDefault();
-
 			Tags_UpdatePage(t);
 		});
 	}
@@ -80,13 +77,10 @@ function Tags_UpdatePage(t) {
 		}
 	}
 
-	if (Tags_ActiveTags & t) {
-		console.log(`Disabling tag ${t}`);
+	if (Tags_ActiveTags & t)
 		Tags_ActiveTags &= ~t;
-	} else {
-		console.log(`Enabling tag ${t}`);
+	else
 		Tags_ActiveTags |= t;
-	}
 }
 
 Tags_InitTags();
