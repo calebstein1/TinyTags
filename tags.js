@@ -21,30 +21,46 @@ function Tags_InitTags() {
 	}
 	for (i = 0; i < Tags_ClickableList.length; i++) {
 		Tags_ClickableList[i].dataset.tagClickable = tag_map[Tags_ClickableList[i].dataset.tagClickable];
+		Tags_ClickableList[i].classList.add('Tags_ToggleActive');
 		Tags_ClickableList[i].addEventListener('click', (e) => {
 			const t = Number(e.target.dataset.tagClickable);
-			const doHide = Tags_ActiveTags & t;
-			let i;
 
 			e.preventDefault();
 
-			if (doHide) {
+			Tags_UpdatePage(t);
+			if (Tags_ActiveTags & t) {
 				console.log(`Disabling tag ${t}`);
 				Tags_ActiveTags &= ~t;
 			} else {
 				console.log(`Enabling tag ${t}`);
 				Tags_ActiveTags |= t;
 			}
-
-			for (i = 0; i < Tags_ElementsList.length; i++) {
-				if (Number(Tags_ElementsList[i].dataset.tag) !== t) continue;
-
-				if (doHide)
-					Tags_ElementsList[i].classList.add('Tags_Hidden');
-				else
-					Tags_ElementsList[i].classList.remove('Tags_Hidden');
-			}
 		});
+	}
+}
+
+function Tags_UpdatePage(t) {
+	let i;
+
+	for (i = 0; i < Tags_ElementsList.length; i++) {
+		if (Number(Tags_ElementsList[i].dataset.tag) !== t) continue;
+
+		if (Tags_ActiveTags & t)
+			Tags_ElementsList[i].classList.add('Tags_Hidden');
+		else
+			Tags_ElementsList[i].classList.remove('Tags_Hidden');
+	}
+	for (i = 0; i < Tags_ClickableList.length; i++) {
+		if (Number(Tags_ClickableList[i].dataset.tagClickable) !== t) continue;
+
+		if (Tags_ActiveTags & t) {
+			Tags_ClickableList[i].classList.remove('Tags_ToggleActive');
+			Tags_ClickableList[i].classList.add('Tags_ToggleInactive');
+		} else {
+			Tags_ClickableList[i].classList.add('Tags_ToggleActive');
+			Tags_ClickableList[i].classList.remove('Tags_ToggleInactive');
+		}
+
 	}
 }
 
