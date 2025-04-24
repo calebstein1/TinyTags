@@ -5,18 +5,26 @@ let Tags_ActiveTags = 0;
 
 function Tags_InitTags() {
 	const tag_map = {};
-	let i, c = 0, current = 1;
+	let i, j, c = 0, current = 1, ct;
+	let tag_array = [];
 
 	for (i = 0; i < Tags_ElementsList.length; i++) {
-		if (!tag_map[Tags_ElementsList[i].dataset.tag]) {
-			tag_map[Tags_ElementsList[i].dataset.tag] = current;
-			Tags_ActiveTags |= current;
-			if (++c >= 64)
-				console.log("Tags: Error: Maximum tag limit reached");
-			else
-				current <<= 1;
+		tag_array = Tags_ElementsList[i].dataset.tag.split(' ');
+		ct = 0;
+		for (j = 0; j < tag_array.length; j++) {
+			if (!tag_map[tag_array[j]]) {
+				tag_map[tag_array[j]] = current;
+				ct |= current;
+				if (++c >= 64)
+					console.log("Tags: Error: Maximum tag limit reached");
+				else
+					current <<= 1;
+			} else {
+				ct |= tag_map[tag_array[j]];
+			}
 		}
-		Tags_ElementsList[i].dataset.tag = tag_map[Tags_ElementsList[i].dataset.tag];
+		Tags_ElementsList[i].dataset.tag = ct;
+		Tags_ActiveTags |= ct;
 	}
 	for (i = 0; i < Tags_ClickableList.length; i++) {
 		Tags_ClickableList[i].dataset.tagClickable = tag_map[Tags_ClickableList[i].dataset.tagClickable];
@@ -41,18 +49,19 @@ function Tags_InitTags() {
 }
 
 function Tags_UpdatePage(t) {
-	let i;
+	let i, tag;
 
 	for (i = 0; i < Tags_ElementsList.length; i++) {
-		if (Number(Tags_ElementsList[i].dataset.tag) !== t) continue;
+		tag = Number(Tags_ElementsList[i].dataset.tag);
+		if (!(tag & t)) continue;
 
-		if (Tags_ActiveTags & t)
+		if ((Tags_ActiveTags & t) && !(Tags_ActiveTags & (tag & ~t)))
 			Tags_ElementsList[i].classList.add('Tags_Hidden');
 		else
 			Tags_ElementsList[i].classList.remove('Tags_Hidden');
 	}
 	for (i = 0; i < Tags_ClickableList.length; i++) {
-		if (Number(Tags_ClickableList[i].dataset.tagClickable) !== t) continue;
+		if (!(Number(Tags_ClickableList[i].dataset.tagClickable) & t)) continue;
 
 		if (Tags_ActiveTags & t) {
 			Tags_ClickableList[i].classList.remove('Tags_ToggleActive');
@@ -64,7 +73,7 @@ function Tags_UpdatePage(t) {
 
 	}
 	for (i = 0; i < Tags_CheckableList.length; i++) {
-		if (Number(Tags_CheckableList[i].dataset.tagCheckable) !== t) continue;
+		if (!(Number(Tags_CheckableList[i].dataset.tagCheckable) & t)) continue;
 
 		if (Tags_ActiveTags & t) {
 			Tags_CheckableList[i].classList.remove('Tags_CheckActive');
