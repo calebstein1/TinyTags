@@ -1,10 +1,34 @@
 {
-  "name": "tags",
+  "name": "tiny-tags",
   "version": "1.0.0",
-  "description": "",
-  "main": "tags.js",
+  "private": true,
+  "description": "A lightweight, performant, and dependency-free content tagging and filtering system",
+  "keywords": [
+    "tag",
+    "tagging",
+    "filter",
+    "filtering",
+    "no-framework",
+    "no-dependencies",
+    "blog",
+    "blogging",
+    "content",
+    "content-organization"
+  ],
+  "homepage": "https://github.com/calebstein1/TinyTags#readme",
+  "bugs": {
+    "url": "https://github.com/calebstein1/TinyTags/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calebstein1/TinyTags.git"
+  },
+  "license": "MIT",
+  "author": "Caleb Stein",
+  "type": "module",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "private": true
+  "packageManager": "npm@11.1.0+sha1.dba08f7d0f5301ebedaf968b4f74b2282f97a750"
 }

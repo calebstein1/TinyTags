@@ -92,4 +92,4 @@ function Tags_UpdatePage(t) {
 		Tags_ActiveTags |= t;
 }
 
-Tags_InitTags();
+export { Tags_InitTags };
