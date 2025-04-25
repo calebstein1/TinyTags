@@ -1,6 +1,6 @@
 {
   "name": "tiny-tags",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "description": "A lightweight, performant, and dependency-free content tagging and filtering system",
   "keywords": [
@@ -22,6 +22,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/calebstein1/TinyTags.git"
+  },
+  "exports": {
+    "default": "./main.js"
   },
   "license": "MIT",
   "author": "Caleb Stein",
