@@ -1,3 +1,1 @@
-import {Tags_InitTags} from "./tags.js";
-
-Tags_InitTags();
+export { Tags_InitTags } from "./tags.js";
