@@ -4,7 +4,7 @@ TinyTags is a tiny (<100 SLOC), performant content tagging and filtering library
 
 ## Usage
 
-First, import the `tiny-tags` file anywhere below your last taggable element (or use defer).
+First, import the `tiny-tags` module, then run `Tags_InitTags()` once your DOM is ready.
 Once that's done, interaction is handled through HTML attributes.
 For each of your taggable elements that should show/hide, use `data-tag={tags}`.
 You can use either buttons or checkboxes to manage toggling.
