@@ -4,7 +4,7 @@ TinyTags is a tiny (<100 SLOC), performant content tagging and filtering library
 
 ## Usage
 
-First, include the `tags.js` file anywhere below your last taggable element (or use defer).
+First, import the `tiny-tags` file anywhere below your last taggable element (or use defer).
 Once that's done, interaction is handled through HTML attributes.
 For each of your taggable elements that should show/hide, use `data-tag={tags}`.
 You can use either buttons or checkboxes to manage toggling.
@@ -15,5 +15,3 @@ Each button or checkbox can be used to toggle a single tag, but each taggable el
 When a taggable element is toggled off, the `Tags_Hidden` class is set for it.
 This class will need to be addressed with CSS.
 Similarly, each button will always have either the `Tags_ToggleActive` or `Tags_ToggleInactive` class, and each checkbox will always have either the `Tags_CheckActive` or `Tags_CheckInactive` class.
-
-See the included HTML file for a basic usage example.
